@@ -19,6 +19,8 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 
 		<version.jboss.bom>9.0.0.Final</version.jboss.bom>
+		<version.htmlunit>2.4</version.htmlunit>
+		<version.gson>2.3.1</version.gson>
 	</properties>
 
 	<dependencyManagement>
@@ -34,7 +36,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-
 		<!-- CDI -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
@@ -47,11 +48,23 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- JSON -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${version.gson}</version>
+		</dependency>
+
 		<!-- REST -->
 		<dependency>
 			<groupId>org.jboss.spec.javax.ws.rs</groupId>
 			<artifactId>jboss-jaxrs-api_2.0_spec</artifactId>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- Persistene -->
@@ -79,17 +92,34 @@
 			<artifactId>arquillian-junit-container</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.wildfly.arquillian</groupId>
 			<artifactId>wildfly-arquillian-container-managed</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jboss.arquillian.protocol</groupId>
 			<artifactId>arquillian-protocol-servlet</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.shrinkwrap.resolver</groupId>
+			<artifactId>shrinkwrap-resolver-depchain</artifactId>
+			<scope>test</scope>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.htmlunit</groupId>
+			<artifactId>htmlunit</artifactId>
+			<version>${version.htmlunit}</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 
