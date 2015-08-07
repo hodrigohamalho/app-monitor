@@ -9,15 +9,32 @@
     <name>APP Monitor</name>
     <description>APP Monitor</description>
 
+    <properties>
+        <version.war.plugin>2.5</version.war.plugin>
+
+        <version.compiler.plugin>3.1</version.compiler.plugin>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
+
     <build>
         <finalName>${project.artifactId}</finalName>
 
         <plugins>
           <plugin>
               <artifactId>maven-war-plugin</artifactId>
-              <version>2.5</version>
+              <version>${version.war.plugin}</version>
               <configuration>
                   <failOnMissingWebXml>false</failOnMissingWebXml>
+              </configuration>
+          </plugin>
+
+          <plugin>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <version>${version.compiler.plugin}</version>
+              <configuration>
+                  <source>${maven.compiler.source}</source>
+                  <target>${maven.compiler.target}</target>
               </configuration>
           </plugin>
         </plugins>
