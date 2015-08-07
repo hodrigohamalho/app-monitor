@@ -15,7 +15,7 @@ public class ApplicationTest {
 	private Application app;
 	
 	@Test
-	public void checkAttributesExistence() {
+	public void hasAttributes() {
 		assertNull(app.getContext());
 		assertNull(app.getLanguage());
 	}

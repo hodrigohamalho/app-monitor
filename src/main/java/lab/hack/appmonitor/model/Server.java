@@ -1,11 +1,14 @@
 package lab.hack.appmonitor.model;
 
+import java.util.List;
+
 public class Server {
 
 	private String ip;
 	private String dns;
 	private String SO; // Enum ? Other entity... TODO
 	private String distro;
+	private List<Application> apps;
 	
 	public String getIp() {
 		return ip;
@@ -31,5 +34,10 @@ public class Server {
 	public void setDistro(String distro) {
 		this.distro = distro;
 	}
-	
+	public List<Application> getApps() {
+		return apps;
+	}
+	public void setApps(List<Application> apps) {
+		this.apps = apps;
+	}
 }
