@@ -1,10 +1,7 @@
 package lab.hack.appmonitor.util;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
-import java.lang.reflect.Member;
-
-import javax.annotation.Resources;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 

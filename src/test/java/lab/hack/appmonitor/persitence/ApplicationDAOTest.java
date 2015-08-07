@@ -76,6 +76,21 @@ public class ApplicationDAOTest {
 		assertTrue(apps.size() >= 5);
 	}
 	
+	@Test
+	public void automaticFillCreatedAtOnSave(){
+		Application app = createApp();
+		assertNotNull(app.getCreatedAt());
+	}
+	
+	@Test
+	public void automaticFillUpdatedAtOnUpdate(){
+		Application app = createApp();
+		
+		app.setLanguage("Ruby");
+		appDAO.update(app);
+		assertNotNull(app.getCreatedAt());
+		assertNotNull(app.getUpdatedAt());
+	}
 	
 	private Application createApp() {
 		Application app = new Application();
