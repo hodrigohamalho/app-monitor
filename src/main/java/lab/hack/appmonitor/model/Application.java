@@ -1,6 +1,9 @@
 package lab.hack.appmonitor.model;
 
-public class Application {
+import javax.persistence.Entity;
+
+@Entity
+public class Application extends SuperEntity{
 
 	private String context;
 	private String language;

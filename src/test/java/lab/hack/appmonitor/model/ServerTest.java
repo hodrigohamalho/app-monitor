@@ -29,6 +29,19 @@ public class ServerTest {
 		List<Application> apps = server.getApps();
 		assertNull(apps);
 	}
-
 	
+	@Test
+	public void hasId(){
+		assertNull(server.getId());
+	}
+	
+	@Test
+	public void hasCreatedAt(){
+		assertNull(server.getCreatedAt());
+	}
+	
+	@Test
+	public void hasUpdatedAt(){
+		assertNull(server.getUpdatedAt());
+	}
 }

@@ -19,5 +19,20 @@ public class ApplicationTest {
 		assertNull(app.getContext());
 		assertNull(app.getLanguage());
 	}
+	
+	@Test
+	public void hasId(){
+		assertNull(app.getId());
+	}
+	
+	@Test
+	public void hasCreatedAt(){
+		assertNull(app.getCreatedAt());
+	}
+	
+	@Test
+	public void hasUpdatedAt(){
+		assertNull(app.getUpdatedAt());
+	}
 
 }
