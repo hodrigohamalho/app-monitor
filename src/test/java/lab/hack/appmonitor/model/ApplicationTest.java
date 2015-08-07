@@ -25,14 +25,14 @@ public class ApplicationTest {
 		assertNull(app.getId());
 	}
 	
-	@Test
-	public void hasCreatedAt(){
-		assertNull(app.getCreatedAt());
-	}
-	
-	@Test
-	public void hasUpdatedAt(){
-		assertNull(app.getUpdatedAt());
-	}
+//	@Test
+//	public void hasCreatedAt(){
+//		assertNull(app.getCreatedAt());
+//	}
+//	
+//	@Test
+//	public void hasUpdatedAt(){
+//		assertNull(app.getUpdatedAt());
+//	}
 
 }

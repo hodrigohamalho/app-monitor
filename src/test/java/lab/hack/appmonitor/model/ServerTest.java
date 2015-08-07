@@ -35,13 +35,13 @@ public class ServerTest {
 		assertNull(server.getId());
 	}
 	
-	@Test
-	public void hasCreatedAt(){
-		assertNull(server.getCreatedAt());
-	}
-	
-	@Test
-	public void hasUpdatedAt(){
-		assertNull(server.getUpdatedAt());
-	}
+//	@Test
+//	public void hasCreatedAt(){
+//		assertNull(server.getCreatedAt());
+//	}
+//	
+//	@Test
+//	public void hasUpdatedAt(){
+//		assertNull(server.getUpdatedAt());
+//	}
 }
