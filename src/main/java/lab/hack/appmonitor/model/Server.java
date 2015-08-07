@@ -13,8 +13,7 @@ public class Server extends SuperEntity{
 	private String dns;
 	private String SO; // Enum ? Other entity... TODO
 	private String distro;
-	@OneToMany
-	@JoinColumn(name="app_id")
+	@OneToMany(mappedBy="server")
 	private List<Application> apps;
 	
 	public String getIp() {
