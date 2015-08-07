@@ -18,7 +18,13 @@ public class ApplicationDAO {
 		em.persist(app);
 	}
 	
+	public void update(Application app){
+		em.merge(app);
+	}
 	
+	public void remove(Application app){
+		em.remove(app);
+	}
 
 	public List<Application> findAll() {
 		String query = "FROM Application ORDER BY ID DESC";

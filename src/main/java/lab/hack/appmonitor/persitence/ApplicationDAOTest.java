@@ -41,6 +41,20 @@ public class ApplicationDAOTest {
 	}
 
 	@Test
+	public void update(){
+		Application appSaved = createApp();
+		Application app = appDAO.findById(appSaved.getId());
+		
+		String context = "/newContext";
+		
+		app.setContext(context);
+		appDAO.update(app);
+		
+		app = appDAO.findById(appSaved.getId());
+		assertEquals(context, app.getContext());
+	}
+	
+	@Test
 	public void findById(){
 		Application appSaved = createApp(); // TODO remove dependency of save method
 		
