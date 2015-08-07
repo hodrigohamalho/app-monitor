@@ -1,6 +1,9 @@
 package lab.hack.appmonitor.persitence;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,12 +37,39 @@ public class ApplicationDAOTest {
 	
 	@Test
 	public void save() {
+		createApp();
+	}
+
+	@Test
+	public void findById(){
+		Application appSaved = createApp(); // TODO remove dependency of save method
+		
+		Application app = appDAO.findById(appSaved.getId());
+		assertNotNull(app);
+		assertEquals(new Long(appSaved.getId()), app.getId());
+		assertEquals(appSaved.getContext(), app.getContext());
+	}
+	
+	@Test
+	public void findAll(){
+		for (int i=0; i<5; i++){
+			createApp();
+		}
+		
+		List<Application> apps = appDAO.findAll();
+		assertNotNull(apps);
+		assertEquals(5, apps.size());
+	}
+	
+	private Application createApp() {
 		Application app = new Application();
 		app.setContext("/haxored");
 		app.setLanguage("Java");
 		
-		appDAO.salvar(app);
+		appDAO.save(app);
 		assertNotNull(app.getId());
+		
+		return app;
 	}
 
 }
