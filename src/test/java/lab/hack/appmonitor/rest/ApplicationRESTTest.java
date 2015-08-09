@@ -1,6 +1,7 @@
 package lab.hack.appmonitor.rest;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -16,6 +17,7 @@ import lab.hack.appmonitor.persitence.ApplicationDAO;
 import lab.hack.appmonitor.persitence.ServerDAO;
 import lab.hack.appmonitor.util.Resource;
 
+import org.apache.commons.httpclient.HttpStatus;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
@@ -23,10 +25,10 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequestSettings;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -41,25 +43,26 @@ public class ApplicationRESTTest {
 		return ShrinkWrap.create(WebArchive.class, "app-monitor-test.war")
 				.addClasses(Resource.class, Server.class, ServerDAO.class, 
 						Application.class, SuperEntity.class, ApplicationDAO.class,
-						ApplicationREST.class, RestActivator.class)
+						ApplicationREST.class, RestActivator.class, TestUtil.class)
 						.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
 						.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
 						.addAsWebInfResource("app-monitor-test-ds.xml")
 						.addAsLibraries(
 								Maven.resolver()
-								.resolve("net.sourceforge.htmlunit:htmlunit:2.4", "com.google.code.gson:gson:2.3.1")
+								.resolve("net.sourceforge.htmlunit:htmlunit:2.4", 
+										 "com.google.code.gson:gson:2.3.1",
+										 "org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final")
 								.withTransitivity()
 								.asFile());
 	}
-
+	
 	@Inject
 	ApplicationDAO dao;
 
-	@Before
-	public void init(){
+	public void populate(){
 		for (int i=0; i < 5; i++){
 			Application app = new Application();
-			app.setContext("/context");
+			app.setContext("/context"+i);
 			app.setLanguage("JAVA");
 
 			dao.save(app);
@@ -69,6 +72,7 @@ public class ApplicationRESTTest {
 
 	@Test
 	public void testGetAll() throws IOException{
+		populate();
 		URL url = new URL(getURL());
 		WebRequestSettings request = new WebRequestSettings(url);
 		WebClient client = new WebClient();
@@ -84,6 +88,7 @@ public class ApplicationRESTTest {
 
 	@Test
 	public void testFindByID() throws IOException{
+		populate();
 		URL url = new URL(getURL()+"/1");
 		WebRequestSettings request = new WebRequestSettings(url);
 		WebClient client = new WebClient();
@@ -93,6 +98,23 @@ public class ApplicationRESTTest {
 		Application app = gson.fromJson(response.getContentAsString(), Application.class);
 		assertEquals(200, response.getStatusCode());
 		assertEquals(Long.valueOf(1), app.getId());
+	}
+	
+	@Test
+	public void testSave() throws IOException{
+		URL url = new URL(getURL());
+		WebRequestSettings request = new WebRequestSettings(url);
+		request.setHttpMethod(HttpMethod.POST);
+		request.setCharset("UTF-8");
+		request.addAdditionalHeader("content-type", "application/json;charset=UTF-8");
+		
+		Application app = new Application("/newContext", "Ruby");
+		request.setRequestBody(TestUtil.toJson(app));
+		
+		WebClient client = new WebClient();
+		WebResponse response = client.loadWebResponse(request);
+
+		assertEquals(HttpStatus.SC_OK, response.getStatusCode());
 	}
 
 

@@ -6,6 +6,13 @@ import javax.persistence.ManyToOne;
 
 @Entity
 public class Application extends SuperEntity{
+	
+	public Application() {}
+	
+	public Application(String context, String language) {
+		this.context = context;
+		this.language = language;
+	}
 
 	private String context;
 	private String language;
