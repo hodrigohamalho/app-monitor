@@ -1,11 +1,13 @@
 package lab.hack.appmonitor.rest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -59,14 +61,19 @@ public class ApplicationRESTTest {
 	@Inject
 	ApplicationDAO dao;
 
-	public void populate(){
+	public List<Application> populate(){
+		List<Application> apps = new ArrayList<Application>();
+		
 		for (int i=0; i < 5; i++){
 			Application app = new Application();
 			app.setContext("/context"+i);
 			app.setLanguage("JAVA");
 
 			dao.save(app);
+			apps.add(app);
 		}
+		
+		return apps;
 	}
 
 
@@ -105,16 +112,50 @@ public class ApplicationRESTTest {
 		URL url = new URL(getURL());
 		WebRequestSettings request = new WebRequestSettings(url);
 		request.setHttpMethod(HttpMethod.POST);
-		request.setCharset("UTF-8");
-		request.addAdditionalHeader("content-type", "application/json;charset=UTF-8");
 		
 		Application app = new Application("/newContext", "Ruby");
-		request.setRequestBody(TestUtil.toJson(app));
+		TestUtil.createRequestBody(request, app);
 		
 		WebClient client = new WebClient();
 		WebResponse response = client.loadWebResponse(request);
 
 		assertEquals(HttpStatus.SC_OK, response.getStatusCode());
+	}
+
+
+	@Test
+	public void testRemove() throws IOException{
+		populate();
+		Long id = new Long(1);
+		
+		URL url = new URL(getURL()+"/"+id);
+		WebRequestSettings request = new WebRequestSettings(url);
+		request.setHttpMethod(HttpMethod.DELETE);
+		
+		WebClient client = new WebClient();
+		WebResponse response = client.loadWebResponse(request);
+		
+		assertEquals(HttpStatus.SC_OK, response.getStatusCode());
+		assertNull(dao.findById(id));
+	}
+	
+	@Test
+	public void testUpdate() throws IOException{
+		List<Application> apps = populate();
+		Application app = apps.get(0);
+		app.setContext("/newContext");
+		
+		URL url = new URL(getURL());
+		WebRequestSettings request = new WebRequestSettings(url);
+		request.setHttpMethod(HttpMethod.PUT);
+		
+		TestUtil.createRequestBody(request, app);
+		
+		WebClient client = new WebClient();
+		WebResponse response = client.loadWebResponse(request);
+		
+		assertEquals(HttpStatus.SC_OK, response.getStatusCode());
+		assertEquals("/newContext", dao.findById(app.getId()).getContext());
 	}
 
 

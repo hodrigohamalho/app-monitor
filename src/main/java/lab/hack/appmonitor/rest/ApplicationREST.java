@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -44,6 +46,21 @@ public class ApplicationREST {
 	@POST
 	public Response save(Application app){
 		appDAO.save(app);
+		return Response.ok().build();
+	}
+	
+	@DELETE
+	@Path("/{id:[0-9][0-9]*}")
+	public Response remove(@PathParam("id") Long id){
+		Application app = appDAO.findById(id);
+		appDAO.remove(app);
+		
+		return Response.ok().build();
+	}
+	
+	@PUT
+	public Response update(Application app){
+		appDAO.update(app);
 		return Response.ok().build();
 	}
 }
