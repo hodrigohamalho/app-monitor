@@ -3,6 +3,7 @@ package lab.hack.appmonitor.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,7 +22,7 @@ public class Server extends SuperEntity{
 	private String dns;
 	private String SO; // Enum ? Other entity... TODO
 	private String distro;
-	@OneToMany(mappedBy="server")
+	@OneToMany(mappedBy="server", fetch=FetchType.EAGER) // TODO LAZY!
 	private List<Application> apps;
 	
 	public String getIp() {
@@ -48,6 +49,7 @@ public class Server extends SuperEntity{
 	public void setDistro(String distro) {
 		this.distro = distro;
 	}
+	
 	public List<Application> getApps() {
 		return apps;
 	}
