@@ -39,12 +39,12 @@ public class ServerDAOTest {
 	
 	@Test
 	public void save() {
-		createApp();
+		createServer();
 	}
 
 	@Test
 	public void update(){
-		Server serverSaved = createApp();
+		Server serverSaved = createServer();
 		Server server = serverDAO.findById(serverSaved.getId());
 		
 		String dns = "newDNS.com";
@@ -58,7 +58,7 @@ public class ServerDAOTest {
 	
 	@Test
 	public void findById(){
-		Server serverSaved = createApp(); // TODO remove dependency of save method
+		Server serverSaved = createServer(); // TODO remove dependency of save method
 		
 		Server app = serverDAO.findById(serverSaved.getId());
 		assertNotNull(app);
@@ -69,7 +69,7 @@ public class ServerDAOTest {
 	@Test
 	public void findAll(){
 		for (int i=0; i<5; i++){
-			createApp();
+			createServer();
 		}
 		
 		List<Server> servers = serverDAO.findAll();
@@ -77,7 +77,7 @@ public class ServerDAOTest {
 		assertEquals(5, servers.size());
 	}
 	
-	private Server createApp() {
+	private Server createServer() {
 		Server server = new Server();
 		server.setIp("172.168.0.1");
 		server.setDns("haxor.com");
