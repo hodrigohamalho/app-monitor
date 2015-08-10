@@ -52,8 +52,7 @@ public class ApplicationREST {
 	@DELETE
 	@Path("/{id:[0-9][0-9]*}")
 	public Response remove(@PathParam("id") Long id){
-		Application app = appDAO.findById(id);
-		appDAO.remove(app);
+		appDAO.remove(id);
 		
 		return Response.ok().build();
 	}

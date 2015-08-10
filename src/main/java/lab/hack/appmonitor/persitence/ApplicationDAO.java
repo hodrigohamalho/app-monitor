@@ -22,7 +22,8 @@ public class ApplicationDAO {
 		em.merge(app);
 	}
 	
-	public void remove(Application app){
+	public void remove(Long id){
+		Application app = findById(id);
 		em.remove(app);
 	}
 

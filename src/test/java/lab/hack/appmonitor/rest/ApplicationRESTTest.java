@@ -27,6 +27,7 @@ import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.jboss.shrinkwrap.resolver.api.maven.Maven;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -58,12 +59,17 @@ public class ApplicationRESTTest {
 								.asFile());
 	}
 	
+	List<Application> apps = new ArrayList<Application>();
+	
 	@Inject
 	ApplicationDAO dao;
 
-	public List<Application> populate(){
-		List<Application> apps = new ArrayList<Application>();
-		
+	@Before
+	public void setup(){
+		populate();
+	}
+	
+	private void populate(){
 		for (int i=0; i < 5; i++){
 			Application app = new Application();
 			app.setContext("/context"+i);
@@ -72,14 +78,11 @@ public class ApplicationRESTTest {
 			dao.save(app);
 			apps.add(app);
 		}
-		
-		return apps;
 	}
 
 
 	@Test
 	public void testGetAll() throws IOException{
-		populate();
 		URL url = new URL(getURL());
 		WebRequestSettings request = new WebRequestSettings(url);
 		WebClient client = new WebClient();
@@ -95,7 +98,6 @@ public class ApplicationRESTTest {
 
 	@Test
 	public void testFindByID() throws IOException{
-		populate();
 		URL url = new URL(getURL()+"/1");
 		WebRequestSettings request = new WebRequestSettings(url);
 		WebClient client = new WebClient();
@@ -109,6 +111,7 @@ public class ApplicationRESTTest {
 	
 	@Test
 	public void testSave() throws IOException{
+		int appsCount = apps.size();
 		URL url = new URL(getURL());
 		WebRequestSettings request = new WebRequestSettings(url);
 		request.setHttpMethod(HttpMethod.POST);
@@ -120,12 +123,13 @@ public class ApplicationRESTTest {
 		WebResponse response = client.loadWebResponse(request);
 
 		assertEquals(HttpStatus.SC_OK, response.getStatusCode());
+		int appsCountAfterSave = dao.findAll().size();
+		assertEquals(appsCount+1,appsCountAfterSave);
 	}
 
 
 	@Test
 	public void testRemove() throws IOException{
-		populate();
 		Long id = new Long(1);
 		
 		URL url = new URL(getURL()+"/"+id);
@@ -141,7 +145,6 @@ public class ApplicationRESTTest {
 	
 	@Test
 	public void testUpdate() throws IOException{
-		List<Application> apps = populate();
 		Application app = apps.get(0);
 		app.setContext("/newContext");
 		
