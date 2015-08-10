@@ -22,8 +22,8 @@ public class ServerDAO {
 		em.merge(server);
 	}
 	
-	public void remove(Server server){
-		em.remove(server);
+	public void remove(Long id){
+		em.remove(findById(id));
 	}
 
 	public List<Server> findAll() {

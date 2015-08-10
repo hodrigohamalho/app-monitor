@@ -3,12 +3,20 @@ package lab.hack.appmonitor.model;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Server extends SuperEntity{
 
+	public Server() {}
+	
+	public Server(String ip, String dns, String sO, String distro) {
+		this.ip = ip;
+		this.dns = dns;
+		this.SO = sO;
+		this.distro = distro;
+	}
+	
 	private String ip;
 	private String dns;
 	private String SO; // Enum ? Other entity... TODO

@@ -15,51 +15,51 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import lab.hack.appmonitor.model.Application;
-import lab.hack.appmonitor.persitence.ApplicationDAO;
+import lab.hack.appmonitor.model.Server;
+import lab.hack.appmonitor.persitence.ServerDAO;
 
-@Path("/apps")
+@Path("/servers")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class ApplicationREST {
-	
+public class ServerREST {
+
 	@Inject
-	ApplicationDAO appDAO;
+	ServerDAO serverDAO;
 	
 	@GET
-	public List<Application> listAllMembers() {
-		return appDAO.findAll();
+	public List<Server> listAllMembers() {
+		return serverDAO.findAll();
 	}
 
 	@GET
 	@Path("/{id:[0-9][0-9]*}")
-	public Application findById(@PathParam("id") long id) {
-		Application app = appDAO.findById(id);
+	public Server findById(@PathParam("id") long id) {
+		Server server = serverDAO.findById(id);
 		
-		if (app == null) {
+		if (server == null) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
 		
-		return app;
+		return server;
 	}
 	
 	@POST
-	public Response save(Application app){
-		appDAO.save(app);
+	public Response save(Server server){
+		serverDAO.save(server);
 		return Response.ok().build();
 	}
 	
 	@DELETE
 	@Path("/{id:[0-9][0-9]*}")
 	public Response remove(@PathParam("id") Long id){
-		appDAO.remove(id);
-		
+		serverDAO.remove(id);
 		return Response.ok().build();
 	}
 	
 	@PUT
-	public Response update(Application app){
-		appDAO.update(app);
+	public Response update(Server server){
+		serverDAO.update(server);
 		return Response.ok().build();
 	}
+	
 }
