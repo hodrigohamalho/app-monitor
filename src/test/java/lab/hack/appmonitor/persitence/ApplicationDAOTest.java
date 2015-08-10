@@ -27,7 +27,7 @@ public class ApplicationDAOTest {
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "app-monitor-test.war")
                 .addClasses(Resource.class, ApplicationDAO.class, Application.class, 
-                		    SuperEntity.class, Server.class)
+                		    SuperEntity.class, Server.class, GenericDAO.class)
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource("app-monitor-test-ds.xml");

@@ -16,6 +16,7 @@ import lab.hack.appmonitor.model.Application;
 import lab.hack.appmonitor.model.Server;
 import lab.hack.appmonitor.model.SuperEntity;
 import lab.hack.appmonitor.persitence.ApplicationDAO;
+import lab.hack.appmonitor.persitence.GenericDAO;
 import lab.hack.appmonitor.persitence.ServerDAO;
 import lab.hack.appmonitor.util.Resource;
 
@@ -46,7 +47,7 @@ public class ApplicationRESTTest {
 		return ShrinkWrap.create(WebArchive.class, "app-monitor-test.war")
 				.addClasses(Resource.class, Server.class, ServerDAO.class, 
 						Application.class, SuperEntity.class, ApplicationDAO.class,
-						ApplicationREST.class, RestActivator.class, TestUtil.class)
+						ApplicationREST.class, RestActivator.class, TestUtil.class, GenericDAO.class)
 						.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
 						.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
 						.addAsWebInfResource("app-monitor-test-ds.xml")
