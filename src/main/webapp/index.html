@@ -41,13 +41,52 @@
         <h3 class="text-muted">APP Monitor</h3>
       </div>
 
-      <div ng-controller="AppController as app">
+      <div ng-controller="ServerController as serverCtrl">
 		<ul class="list-group" >
-			<li class="list-group-item" ng-repeat="server in app.servers">
-				<h3>{{server.dns}}</h3>
+			<li class="list-group-item" ng-repeat="server in servers">
+				<h3>{{server.dns || server.ip}}</h3>
 			</li>
 		</ul>
-	  </div>
+		
+		<form id="server-form" class="form-horizontal">
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="textinput">IP</label>  
+				<div class="col-md-5">
+					<input id="textinput" name="textinput" ng-model="server.ip" type="text" class="form-control input-md" required="">
+				</div>
+			</div>
+				
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="textinput">DNS</label>  
+				<div class="col-md-5">
+					<input id="textinput" name="textinput" ng-model="server.dns" type="text" class="form-control input-md" >
+				</div>
+			</div>
+				
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="so">O.S</label>  
+				<div class="col-md-5">
+					<input id="so" name="so" ng-model="server.so" type="text" class="form-control input-md" required="">
+				</div>
+			</div>
+				
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="distribution">Distribution</label>  
+				<div class="col-md-5">
+					<input id="distribution" ng-model="server.distro" name="distribution" type="text" class="form-control input-md">
+				</div>
+			</div>
+				
+			<!-- Button -->
+			<div class="form-group">
+				<label class="col-md-4 control-label" for="save"></label>
+			<div class="col-md-4">
+				<button id="save" name="save" class="btn btn-primary" ng-click="save()">Save</button>
+			</div>
+			</div>
+		</form>
+
+ </div>
 
       <footer class="footer">
         <p>Haxors Lab &copy; Company 2015</p>
