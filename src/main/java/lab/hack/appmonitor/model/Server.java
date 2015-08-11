@@ -22,7 +22,7 @@ public class Server extends SuperEntity{
 	private String dns;
 	private String SO; // Enum ? Other entity... TODO
 	private String distro;
-	@OneToMany(mappedBy="server", fetch=FetchType.EAGER) // TODO LAZY!
+	@OneToMany(mappedBy="server", fetch=FetchType.EAGER)
 	private List<Application> apps;
 	
 	public String getIp() {

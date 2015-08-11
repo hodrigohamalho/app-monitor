@@ -58,13 +58,6 @@ public class ServerRESTTest {
 										 "org.jboss.resteasy:resteasy-jackson-provider:3.0.11.Final")
 								.withTransitivity()
 								.asFile());
-		/**
-		 * <dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId></artifactId>
-			<version>2.6.0</version>
-		</dependency>
-		 */
 	}
 	
 	@Inject
