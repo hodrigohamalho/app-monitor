@@ -1,19 +1,65 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html ng-app="app-monitor">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css" />
-	<title>App Monitor</title>
-</head> 
-<body>
-	<div ng-controller="AppController as app">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>APP Monitor :: Lab Project</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="css/vendor/jumbotron-narrow.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/vendor/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">APP Monitor</h3>
+      </div>
+
+      <div ng-controller="AppController as app">
 		<ul class="list-group" >
 			<li class="list-group-item" ng-repeat="server in app.servers">
 				<h3>{{server.dns}}</h3>
 			</li>
 		</ul>
-	</div>
-	<script type="text/javascript" src="js/vendor/angular.min.js"></script>
+	  </div>
+
+      <footer class="footer">
+        <p>Haxors Lab &copy; Company 2015</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="js/vendor/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="js/vendor/angular.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
-</body>
+  </body>
 </html>
+
