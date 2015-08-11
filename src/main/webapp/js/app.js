@@ -1,7 +1,34 @@
 (function(){
 	var app = angular.module('app-monitor', ['ui.bootstrap']);
+	
+	app.controller('ServerModalCtrl', function ($scope, $http, $modalInstance, server, $log) {
 
-	app.controller('ServerController', [ '$scope', '$http', function($scope, $http){
+		$scope.server = server;
+
+		$scope.save = function(){
+			if ($scope.server.id != null){
+				// UPDATE
+				$http.put('api/servers', $scope.server).then(function(){
+					$log.info("server updated!");
+				});
+			}else{
+				// SAVE
+				$http.post('api/servers', $scope.server).then(function(){
+					$log.info("server saved!");
+				});
+			}
+			
+			$modalInstance.close($scope.server);
+		};
+
+		$scope.cancel = function () {
+			$log.info("Cancel");
+			$modalInstance.dismiss('cancel');
+		};
+		  
+	});
+
+	app.controller('ServerController', function($scope, $http, $modal, $log){
 		var self = this;
 		$scope.server = {};
 
@@ -9,22 +36,6 @@
 			$http.get('api/servers').then(function(serversList){
 				$scope.servers = serversList.data;
 			});
-		};
-
-		$scope.save = function(){
-			if ($scope.server.id != null){
-				$http.put('api/servers', $scope.server).then(function(){
-					$scope.server = {};
-				}, function(response){
-					console.log("ERROR on update server: "+response);
-					$scope.list();
-				});
-			}else{
-				$http.post('api/servers', $scope.server).then(function(){
-					$scope.servers.unshift($scope.server);
-					$scope.server = {};
-				});
-			}
 		};
 
 		$scope.remove = function(server){
@@ -39,9 +50,31 @@
 		$scope.edit = function(server){
 			$scope.server = server;
 		};
+		
+		$scope.open = function (size) {
+
+		    var modalInstance = $modal.open({
+		      animation: true,
+		      templateUrl: 'myModalContent.html',
+		      controller: 'ServerModalCtrl',
+		      size: size,
+		      resolve: {
+		          server: function () {
+		            return $scope.server;
+		          }
+		        }
+		    });
+
+			modalInstance.result.then(function (data) {
+				$scope.list();
+				$log.info("Callback modal: "+data);
+			}, function () {
+				$log.info('Modal dismissed at: ' + new Date());
+			});
+		};
 
 		$scope.list();
 
-	}]);
+	});
 
 })();
