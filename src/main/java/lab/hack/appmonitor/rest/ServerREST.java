@@ -50,7 +50,7 @@ public class ServerREST {
 	@POST
 	public Response save(Server server){
 		serverDAO.save(server);
-		log.info("Server: "+server.getDns() + "created!");
+		log.info("Server: "+server.getDns() + " created!");
 		return Response.ok().build();
 	}
 	
