@@ -1,6 +1,7 @@
 package lab.hack.appmonitor.rest;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -24,7 +25,10 @@ import lab.hack.appmonitor.persitence.ServerDAO;
 public class ServerREST {
 
 	@Inject
-	ServerDAO serverDAO;
+	private Logger log;
+	
+	@Inject
+	private ServerDAO serverDAO;
 	
 	@GET
 	public List<Server> listAllMembers() {
@@ -46,6 +50,7 @@ public class ServerREST {
 	@POST
 	public Response save(Server server){
 		serverDAO.save(server);
+		log.info("Server: "+server.getDns() + "created!");
 		return Response.ok().build();
 	}
 	
