@@ -27,7 +27,7 @@ public class ApplicationDAOTest {
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "app-monitor-test.war")
                 .addClasses(Resource.class, ApplicationDAO.class, Application.class, 
-                		    SuperEntity.class, Server.class, GenericDAO.class)
+                		    SuperEntity.class, Server.class, GenericDAO.class, ServerDAO.class)
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 .addAsWebInfResource("app-monitor-test-ds.xml");
@@ -35,10 +35,25 @@ public class ApplicationDAOTest {
 	
 	@Inject
 	ApplicationDAO appDAO;
+	@Inject
+	ServerDAO serverDAO;
+	
 	
 	@Test
 	public void save() {
 		createApp();
+	}
+	
+	@Test
+	public void saveWithServer(){
+		Server server = new Server("172.29.1.2", "haxorslab.com", "Linux", "Red Hat");
+		serverDAO.save(server);
+		
+		Application app = new Application("/checkmat", "Python");
+		app.setServer(server);
+		appDAO.save(app);
+		
+		assertEquals(server.getId(), appDAO.findById(app.getId()).getServer().getId());
 	}
 
 	@Test
@@ -93,9 +108,7 @@ public class ApplicationDAOTest {
 //	}
 	
 	private Application createApp() {
-		Application app = new Application();
-		app.setContext("/haxored");
-		app.setLanguage("Java");
+		Application app = new Application("/haxored","Java");
 		
 		appDAO.save(app);
 		assertNotNull(app.getId());
