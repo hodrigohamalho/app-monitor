@@ -5,7 +5,9 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import lab.hack.appmonitor.model.Application;
 import lab.hack.appmonitor.model.Server;
+import lab.hack.appmonitor.persitence.ApplicationDAO;
 import lab.hack.appmonitor.persitence.ServerDAO;
 
 @Startup
@@ -14,6 +16,8 @@ public class PopulateUtil {
 
 	@Inject
 	ServerDAO serverDAO;
+	@Inject
+	ApplicationDAO appDAO;
 	
 	@PostConstruct
 	public void populateServer(){
@@ -27,6 +31,13 @@ public class PopulateUtil {
 			
 			serverDAO.save(server);
 			System.out.println("Server "+server.getDns()+" saved!");
+			
+			Application app = new Application("/hack", "Ruby");
+			Application app2 = new Application("/globo", "Java");
+			app.setServer(server);
+			app2.setServer(server);
+			appDAO.save(app);
+			appDAO.save(app2);
 		}
 		System.out.println("Finish....");
 	}
