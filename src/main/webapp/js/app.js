@@ -47,7 +47,7 @@
 			}
 		};
 
-		$scope.open = function (server) {
+		$scope.serverModal = function (server) {
 			if (server != null){
 				$scope.server = server;
 			}

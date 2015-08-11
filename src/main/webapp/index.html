@@ -44,19 +44,19 @@
       
 	  <div ng-controller="ServerController">
 	      <div class="pull-right">
-	      	<button type="button" id="add-server-button" class="btn btn-success" ng-click="open()">
+	      	<button type="button" class="btn btn-success add-server-button" ng-click="serverModal()">
 	      		Add Server
 	      	</button>
 	      </div>
 		  <div class="clearfix"></div>
 		  	      
-		  <accordion close-others="false">
-			    <accordion-group heading="" ng-repeat="server in servers">
+		  <accordion close-others="true">
+			    <accordion-group ng-repeat="server in servers">
 				    <accordion-heading>
 			            {{server.dns || server.ip}}
 			            <div class="pull-right"> 
-			            	  <span class="badge">14</span>
-				              <button type="button" ng-click="open(server)" class="btn btn-default btn-sm btn-edit" title="Edit">
+			            	  <span class="badge">{{server.apps.length}}</span>
+				              <button type="button" ng-click="serverModal(server)" class="btn btn-default btn-sm btn-edit" title="Edit">
 				                 <span class="glyphicon glyphicon-pencil"></span>
 				              </button>
 				              
@@ -67,13 +67,18 @@
 			        </accordion-heading>
 			        <div class="server-info">
 			        	<div>{{server.ip}} | {{server.so}} - {{server.distro}}</div>
-			        	
-			        	<div>
-			        		
-			        	</div> 
 			        </div>
-			      	<p>The body of the accordion group grows to fit the contents</p>
-			        <button type="button" class="btn btn-default btn-sm" >Add Item</button>
+			        
+			      	<button type="button" class="pull-right btn btn-success btn-sm add-server-button" ng-click="serverModal()">
+			        	Add Application
+			        </button>
+			        <div class="clearfix"></div>
+			        
+			        <ul class="list-group">
+					  <li class="list-group-item" ng-repeat="app in server.apps">
+					  	{{app.context}} - {{app.language}}
+					  </li>
+					</ul>
 			    </accordion-group>
 		  	</accordion>
 	  	
