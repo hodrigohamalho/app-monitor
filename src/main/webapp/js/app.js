@@ -47,17 +47,15 @@
 			}
 		};
 
-		$scope.edit = function(server){
-			$scope.server = server;
-		};
-		
-		$scope.open = function (size) {
-
+		$scope.open = function (server) {
+			if (server != null){
+				$scope.server = server;
+			}
+				
 		    var modalInstance = $modal.open({
 		      animation: true,
-		      templateUrl: 'myModalContent.html',
+		      templateUrl: 'serverModalForm.html',
 		      controller: 'ServerModalCtrl',
-		      size: size,
 		      resolve: {
 		          server: function () {
 		            return $scope.server;
