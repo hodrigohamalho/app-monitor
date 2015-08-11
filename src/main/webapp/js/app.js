@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('app-monitor', []);
+	var app = angular.module('app-monitor', ['ui.bootstrap']);
 
 	app.controller('ServerController', [ '$scope', '$http', function($scope, $http){
 		var self = this;
