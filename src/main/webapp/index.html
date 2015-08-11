@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="css/vendor/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
 
     <!-- Custom styles for this template -->
     <link href="css/vendor/jumbotron-narrow.css" rel="stylesheet">
@@ -40,22 +41,28 @@
         </nav>
         <h3 class="text-muted">APP Monitor</h3>
       </div>
-
-      <div ng-controller="ServerController as serverCtrl">
-		<ul class="list-group" >
-			<li class="list-group-item" ng-repeat="server in servers">
-				<h3>{{server.dns || server.ip}}</h3>
-				
-                <button type="button" ng-click="edit(server)" class="btn btn-default btn-sm btn-edit" title="Edit">
-                   <span class="glyphicon glyphicon-pencil"></span>
-                </button>
-                <button type="button" ng-click="remove(server)" class="btn btn-default btn-sm btn-remove" title="Remove it!">
-                   <span class="glyphicon glyphicon-remove"></span>
-               </button>
-			</li>
-		</ul>
-		
-		<form id="server-form" class="form-horizontal">
+      
+	  <div ng-controller="ServerController as serverCtrl">
+		  <accordion close-others="false">
+			    <accordion-group heading="" ng-repeat="server in servers">
+				    <accordion-heading>
+			            {{server.dns || server.ip}}
+			            <div class="pull-right"> 
+			            <button type="button" ng-click="edit(server)" class="btn btn-default btn-sm btn-edit" title="Edit">
+			                 <span class="glyphicon glyphicon-pencil"></span>
+			              </button>
+			              
+			              <button type="button" ng-click="remove(server)" class="btn btn-default btn-sm btn-remove" title="Remove it!">
+			                 <span class="glyphicon glyphicon-remove"></span>
+			             </button>
+			            </div>
+			        </accordion-heading>
+			      	<p>The body of the accordion group grows to fit the contents</p>
+			        <button type="button" class="btn btn-default btn-sm" >Add Item</button>
+			    </accordion-group>
+		  	</accordion>
+	  	
+		   <form id="server-form" class="form-horizontal">
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="textinput">IP</label>  
 				<div class="col-md-5">
@@ -93,8 +100,7 @@
 			</div>
 			</div>
 		</form>
-
- </div>
+ 	</div>
 
       <footer class="footer">
         <p>Haxors Lab &copy; Company 2015</p>
@@ -104,8 +110,10 @@
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/vendor/ie10-viewport-bug-workaround.js"></script>
     <script type="text/javascript" src="js/vendor/angular.min.js"></script>
+    <script type="text/javascript" src="js/vendor/ie10-viewport-bug-workaround.js"></script>
+    <script type="text/javascript" src="js/vendor/ui-bootstrap-0.13.3.min.js"></script>
+    <script type="text/javascript" src="js/vendor/ui-bootstrap-tpls-0.13.3.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>
