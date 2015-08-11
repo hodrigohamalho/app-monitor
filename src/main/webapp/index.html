@@ -43,15 +43,19 @@
       </div>
       
 	  <div ng-controller="ServerController">
-	      <div>
-	      	<button type="button" class="btn btn-default" ng-click="open()">Add</button>
+	      <div class="pull-right">
+	      	<button type="button" id="add-server-button" class="btn btn-success" ng-click="open()">
+	      		Add Server
+	      	</button>
 	      </div>
-	      
+		  <div class="clearfix"></div>
+		  	      
 		  <accordion close-others="false">
 			    <accordion-group heading="" ng-repeat="server in servers">
 				    <accordion-heading>
 			            {{server.dns || server.ip}}
 			            <div class="pull-right"> 
+			            	  <span class="badge">14</span>
 				              <button type="button" ng-click="open(server)" class="btn btn-default btn-sm btn-edit" title="Edit">
 				                 <span class="glyphicon glyphicon-pencil"></span>
 				              </button>
@@ -61,6 +65,13 @@
 				             </button>
 			            </div>
 			        </accordion-heading>
+			        <div class="server-info">
+			        	<div>{{server.ip}} | {{server.so}} - {{server.distro}}</div>
+			        	
+			        	<div>
+			        		
+			        	</div> 
+			        </div>
 			      	<p>The body of the accordion group grows to fit the contents</p>
 			        <button type="button" class="btn btn-default btn-sm" >Add Item</button>
 			    </accordion-group>

@@ -1,1 +1,5 @@
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+#add-server-button{
+	margin-bottom: 5px;
+}
