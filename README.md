@@ -7,6 +7,7 @@ http://rodrigoramalho-appmonitor.rhcloud.com/
 	* Java
 	* Maven (dependency and build)
 	* JPA (Persistence)
+	* CDI
 	* JAX-RS (Rest)
 	* JUnit (Test)
 	* Arquillian (Test)
