@@ -9,12 +9,12 @@
 			if ($scope.app.id != null){
 				// UPDATE
 				$http.put('api/apps', $scope.app).then(function(){
-					$log.info("app updated!");
+//					$log.info("app updated!");
 				});
 			}else{
 				// SAVE
 				$http.post('api/apps', $scope.app).then(function(){
-					$log.info("app saved!");
+//					$log.info("app saved!");
 				});
 			}
 			
@@ -22,7 +22,7 @@
 		};
 
 		$scope.cancel = function () {
-			$log.info("Cancel");
+//			$log.info("Cancel");
 			$modalInstance.dismiss('cancel');
 		};
 		  
@@ -36,12 +36,12 @@
 			if ($scope.server.id != null){
 				// UPDATE
 				$http.put('api/servers', $scope.server).then(function(){
-					$log.info("server updated!");
+//					$log.info("server updated!");
 				});
 			}else{
 				// SAVE
 				$http.post('api/servers', $scope.server).then(function(){
-					$log.info("server saved!");
+//					$log.info("server saved!");
 				});
 			}
 			
@@ -49,7 +49,7 @@
 		};
 
 		$scope.cancel = function () {
-			$log.info("Cancel");
+//			$log.info("Cancel");
 			$modalInstance.dismiss('cancel');
 		};
 		  
@@ -94,7 +94,7 @@
 			modalInstance.result.then(function (data) {
 				$scope.server = {};
 				$scope.list();
-				$log.info("Callback modal: "+data);
+//				$log.info("Callback modal: "+data);
 			}, function () {
 				$scope.server = {};
 			});
@@ -120,7 +120,7 @@
 			modalInstance.result.then(function (data) {
 				$scope.app = {};
 				$scope.list();
-				$log.info("Callback modal: "+data);
+//				$log.info("Callback modal: "+data);
 			}, function () {
 				$scope.app = {};
 			});
