@@ -23,6 +23,7 @@
 		<version.gson>2.3.1</version.gson>
 	</properties>
 
+
 	<repositories>
 		<repository>
 			<id>jboss-ga-repository</id>
@@ -48,7 +49,29 @@
 				<updatePolicy>never</updatePolicy>
 			</snapshots>
 		</repository>
-
+		<pluginRepositories>
+			<pluginRepository>
+				<id>jboss-public-repository-group</id>
+				<name>JBoss Public Repository Group</name>
+				<url>http://repository.jboss.org/nexus/content/groups/public/</url>
+				<releases>
+					<enabled>true</enabled>
+				</releases>
+				<snapshots>
+					<enabled>true</enabled>
+				</snapshots>
+			</pluginRepository>
+			<pluginRepository>
+				<id>jboss-ga-plugin-repository</id>
+				<url>http://maven.repository.redhat.com/techpreview/all</url>
+				<releases>
+					<enabled>true</enabled>
+				</releases>
+				<snapshots>
+					<enabled>false</enabled>
+				</snapshots>
+			</pluginRepository>
+		</pluginRepositories>
 	</repositories>
 
 	<dependencyManagement>
@@ -181,13 +204,6 @@
 
 	<profiles>
 		<profile>
-			<!-- When built in OpenShift the 'openshift' profile will be used when 
-				invoking mvn. -->
-			<!-- Use this profile for any OpenShift specific customization your app 
-				will need. -->
-			<!-- By default that is to put the resulting archive into the 'deployments' 
-				folder. -->
-			<!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
 			<id>openshift</id>
 			<build>
 				<plugins>
