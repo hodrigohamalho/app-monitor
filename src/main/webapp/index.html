@@ -78,6 +78,15 @@
 				        <ul class="list-group">
 						  <li class="list-group-item" ng-repeat="app in server.apps">
 						  	{{app.context}} - {{app.language}}
+							<div class="pull-right"> 
+								<button type="button" ng-click="appModal(app, server.id)" class="btn btn-default btn-sm btn-edit" title="Edit">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</button>
+							         
+								<button type="button" ng-click="removeApp(app)" class="btn btn-default btn-sm btn-remove" title="Remove it!">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+							</div>
 						  </li>
 						</ul>
 					</div>

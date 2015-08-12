@@ -67,7 +67,7 @@
 		};
 
 		$scope.remove = function(server){
-			var confirm = window.confirm('Tem certeza que deseja excluir o server '+ server.dns+ '?');
+			var confirm = window.confirm('Are you sure to delete '+ server.dns+ '?');
 			if(confirm){
 				$http.delete('api/servers/'+server.id).then(function(){
 					$scope.list();
@@ -100,12 +100,10 @@
 		};
 		
 		$scope.appModal = function (app, serverId) {
-			debugger;
 			if (app != null){
 				$scope.app = app;
-			}else{
-				$scope.app.server = { "id": serverId };
 			}
+			$scope.app.server = { "id": serverId };
 				
 		    var modalInstance = $modal.open({
 		      animation: true,
@@ -124,6 +122,15 @@
 			}, function () {
 				$log.info('Modal dismissed at: ' + new Date());
 			});
+		};
+		
+		$scope.removeApp = function(app){
+			var confirm = window.confirm('Are you sure to delete '+ app.context+ '?');
+			if(confirm){
+				$http.delete('api/apps/'+app.id).then(function(){
+					$scope.list();
+				});
+			}
 		};
 
 		$scope.list();
