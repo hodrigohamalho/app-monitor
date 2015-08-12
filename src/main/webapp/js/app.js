@@ -92,6 +92,7 @@
 		    });
 
 			modalInstance.result.then(function (data) {
+				$scope.server = {};
 				$scope.list();
 				$log.info("Callback modal: "+data);
 			}, function () {
@@ -117,6 +118,7 @@
 		    });
 
 			modalInstance.result.then(function (data) {
+				$scope.app = {};
 				$scope.list();
 				$log.info("Callback modal: "+data);
 			}, function () {
