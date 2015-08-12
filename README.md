@@ -31,9 +31,9 @@ export JBOSS_HOME=/opt/wildfly-9.0.1.Final/
 
 ## Docker
 
-The docker script download and configure JDK and Wildfly to run the application app-monitor. It makes all adjustments and deploy the application that is exposed on 8080 port.
+The docker script downloads and configures JDK and Wildfly to run the application app-monitor. It makes all adjustments and deploy the application that is exposed on 8080 port.
 
-To run the script you just need execute start.sh located on docker directory.
+To run the script you just need to execute start.sh located on docker directory.
 
 ```
 ./docker/start.sh
@@ -41,4 +41,4 @@ To run the script you just need execute start.sh located on docker directory.
 
 This script tries to build the app from your local repository, if it doesn't work the app-monitor.war package will be downloaded from github and deployed directly.
 
-So access: http://localhost:8080/app-monitor
+Finally, access: http://localhost:8080/app-monitor
