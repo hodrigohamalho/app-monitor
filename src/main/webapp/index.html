@@ -97,13 +97,13 @@
          	<div class="modal-header">
              	<h3 class="modal-title">Server</h3>
          	</div>
-            <form id="server-form" class="form-horizontal">
+            <form name="serverForm" ng-submit="serverForm.$valid && save()" novalidate class="form-horizontal">
          		<div class="modal-body">
  			           <div class="form-group">
              				<label class="col-md-4 control-label" for="server-id">IP</label>  
              				<div class="col-md-5">
              					<input id="server-id" name="server-id" ng-model="server.id" value="{{server.id}}" class="hidden"/>
-             					<input id="ip" name="ip" ng-model="server.ip" type="text" class="form-control input-md" required="">
+             					<input id="ip" name="ip" ng-model="server.ip" type="text" class="form-control input-md" required>
              				</div>
              		  </div>
  				
@@ -117,7 +117,7 @@
              			<div class="form-group">
              				<label class="col-md-4 control-label" for="so">O.S</label>  
              				<div class="col-md-5">
-             					<input id="so" name="so" ng-model="server.so" type="text" class="form-control input-md" required="">
+             					<input id="so" name="so" ng-model="server.so" type="text" class="form-control input-md" required>
              				</div>
              			</div>
              				
@@ -130,7 +130,7 @@
            			  </div>
          		</div>
          		<div class="modal-footer">
-					<button id="save" name="save" class="btn btn-primary" ng-click="save()">Save</button>
+					<button type="submit" id="save" name="save" class="btn btn-primary">Save</button>
              		<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
          		</div>
            	</form>
@@ -140,25 +140,25 @@
          	<div class="modal-header">
              	<h3 class="modal-title">Application</h3>
          	</div>
-            <form id="server-form" class="form-horizontal">
+            <form name="appForm" ng-submit="appForm.$valid && save()" class="form-horizontal" novalidate >
          		<div class="modal-body">
  			           <div class="form-group">
              				<label class="col-md-4 control-label" for="app-id">Context</label>  
              				<div class="col-md-5">
              					<input id="app-id" name="app-id" ng-model="app.id" value="{{app.id}}" class="hidden"/>
-             					<input id="context" name="context" ng-model="app.context" type="text" class="form-control input-md" required="">
+             					<input id="context" name="context" ng-model="app.context" type="text" class="form-control input-md" required>
              				</div>
              		  </div>
  				
              		  <div class="form-group">
              				<label class="col-md-4 control-label" for="language">Language</label>  
              				<div class="col-md-5">
-             					<input id="language" name="language" ng-model="app.language" type="text" class="form-control input-md" >
+             					<input id="language" name="language" ng-model="app.language" type="text" class="form-control input-md" required>
              				</div>
              		  </div>
          		</div>
          		<div class="modal-footer">
-					<button id="save" name="save" class="btn btn-primary" ng-click="save()">Save</button>
+					<button id="save" type="submit" name="save" class="btn btn-primary">Save</button>
              		<button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
          		</div>
            	</form>

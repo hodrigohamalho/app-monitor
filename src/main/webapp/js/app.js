@@ -95,7 +95,7 @@
 				$scope.list();
 				$log.info("Callback modal: "+data);
 			}, function () {
-				$log.info('Modal dismissed at: ' + new Date());
+				$scope.server = {};
 			});
 		};
 		
@@ -120,7 +120,7 @@
 				$scope.list();
 				$log.info("Callback modal: "+data);
 			}, function () {
-				$log.info('Modal dismissed at: ' + new Date());
+				$scope.app = {};
 			});
 		};
 		
