@@ -61,12 +61,16 @@ public class ServerREST {
 	@Path("/{id:[0-9][0-9]*}")
 	public Response remove(@PathParam("id") Long id){
 		serverDAO.remove(id);
+		
+		log.info("Server with id: "+id+" removed!");
 		return Response.ok().build();
 	}
 	
 	@PUT
 	public Response update(Server server){
 		serverDAO.update(server);
+		
+		log.info("Server: "+server.getDns() + " updated!");
 		return Response.ok().build();
 	}
 	

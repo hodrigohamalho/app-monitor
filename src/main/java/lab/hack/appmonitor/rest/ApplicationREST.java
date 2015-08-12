@@ -1,6 +1,7 @@
 package lab.hack.appmonitor.rest;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -23,6 +24,8 @@ import lab.hack.appmonitor.persitence.ApplicationDAO;
 @Produces(MediaType.APPLICATION_JSON)
 public class ApplicationREST {
 	
+	@Inject
+	private Logger log;
 	@Inject
 	ApplicationDAO appDAO;
 	
@@ -49,6 +52,7 @@ public class ApplicationREST {
 			return Response.status(Response.Status.BAD_REQUEST).build();
 		
 		appDAO.save(app);
+		log.info("App: "+app.getContext() + " created!");
 		return Response.ok().build();
 	}
 	
@@ -56,13 +60,14 @@ public class ApplicationREST {
 	@Path("/{id:[0-9][0-9]*}")
 	public Response remove(@PathParam("id") Long id){
 		appDAO.remove(id);
-		
+		log.info("App with id: "+id+" removed!");
 		return Response.ok().build();
 	}
 	
 	@PUT
 	public Response update(Application app){
 		appDAO.update(app);
+		log.info("App: "+app.getContext() + " updated!");
 		return Response.ok().build();
 	}
 }
