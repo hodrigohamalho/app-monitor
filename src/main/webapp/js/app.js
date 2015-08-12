@@ -1,5 +1,23 @@
 (function(){
-	var app = angular.module('app-monitor', ['ui.bootstrap']);
+	var app = angular.module('app-monitor', ['ui.bootstrap', 'ngRoute']);
+	
+	app.config(function($routeProvider) {
+					$routeProvider.
+					when('/home', {
+						templateUrl: 'home.html',
+						controller: 'ServerController'
+					}).
+					when('/about', {
+						templateUrl: 'about.html'
+					}).
+					when('/contact', {
+						templateUrl: 'contact.html'
+					}).
+					otherwise({
+						redirectTo: '/home'
+					});
+				});
+	
 	
 	app.controller('AppModalCtrl', function ($scope, $http, $modalInstance, app, $log) {
 
