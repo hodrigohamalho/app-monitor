@@ -49,7 +49,8 @@
 				<updatePolicy>never</updatePolicy>
 			</snapshots>
 		</repository>
-		<pluginRepositories>
+	</repositories>
+	<pluginRepositories>
 			<pluginRepository>
 				<id>jboss-public-repository-group</id>
 				<name>JBoss Public Repository Group</name>
@@ -72,7 +73,6 @@
 				</snapshots>
 			</pluginRepository>
 		</pluginRepositories>
-	</repositories>
 
 	<dependencyManagement>
 		<dependencies>
