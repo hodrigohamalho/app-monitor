@@ -2,6 +2,7 @@ package lab.hack.appmonitor.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -26,7 +27,7 @@ public class Server extends SuperEntity{
 	private String dns;
 	private String SO; // Enum ? Other entity... TODO
 	private String distro;
-	@OneToMany(mappedBy="server", fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.REMOVE, mappedBy="server", fetch=FetchType.EAGER)
 	private List<Application> apps;
 	
 	public String getIp() {
