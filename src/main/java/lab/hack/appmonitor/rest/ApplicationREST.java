@@ -45,6 +45,9 @@ public class ApplicationREST {
 	
 	@POST
 	public Response save(Application app){
+		if (app == null)
+			return Response.status(Response.Status.BAD_REQUEST).build();
+		
 		appDAO.save(app);
 		return Response.ok().build();
 	}
