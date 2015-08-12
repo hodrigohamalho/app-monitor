@@ -1,7 +1,6 @@
 package lab.hack.appmonitor.rest;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -95,7 +94,7 @@ public class ServerRESTTest {
 		Type list = new TypeToken<List<Server>>(){}.getType();
 		List<Server> svs = gson.fromJson(response.getContentAsString(), list);
 		assertEquals(200, response.getStatusCode());
-		assertEquals(servers.size(), svs.size());
+		assertTrue(servers.size() < svs.size());
 	}
 
 	@Test
@@ -125,6 +124,20 @@ public class ServerRESTTest {
 		WebResponse response = client.loadWebResponse(request);
 
 		assertEquals(HttpStatus.SC_OK, response.getStatusCode());
+	}
+	
+	@Test
+	public void testSaveWithNullServer() throws IOException{
+		URL url = new URL(getURL());
+		WebRequestSettings request = new WebRequestSettings(url);
+		request.setHttpMethod(HttpMethod.POST);
+		
+		TestUtil.createRequestBody(request, null);
+		
+		WebClient client = new WebClient();
+		WebResponse response = client.loadWebResponse(request);
+
+		assertEquals(HttpStatus.SC_BAD_REQUEST, response.getStatusCode());
 	}
 
 

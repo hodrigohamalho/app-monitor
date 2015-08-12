@@ -49,6 +49,9 @@ public class ServerREST {
 	
 	@POST
 	public Response save(Server server){
+		if (server == null)
+			return Response.status(Response.Status.BAD_REQUEST).build();
+					
 		serverDAO.save(server);
 		log.info("Server: "+server.getDns() + " created!");
 		return Response.ok().build();
