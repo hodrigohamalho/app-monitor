@@ -4,6 +4,8 @@ http://rodrigoramalho-appmonitor.rhcloud.com/
 
 ## Jenkins
 
+This application uses Jenkins to build and deploy application on Openshift.
+
 https://jenkins-appmonitor.rhcloud.com
 
 ## Technologies:
