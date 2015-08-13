@@ -2,6 +2,10 @@
 
 http://rodrigoramalho-appmonitor.rhcloud.com/
 
+## Jenkins
+
+https://jenkins-appmonitor.rhcloud.com
+
 ## Technologies:
 
 	* Java
