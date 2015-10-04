@@ -1,5 +1,6 @@
 (function(){
 	var app = angular.module('app-monitor');
+	var api = "http://localhost:8180/app-monitor-api/api/";
 	
 	app.controller('AppModalCtrl', function ($scope, $http, $modalInstance, app, $log) {
 
@@ -8,12 +9,12 @@
 		$scope.save = function(){
 			if ($scope.app.id != null){
 				// UPDATE
-				$http.put('api/apps', $scope.app).then(function(){
+				$http.put(api +'apps', $scope.app).then(function(){
 //					$log.info("app updated!");
 				});
 			}else{
 				// SAVE
-				$http.post('api/apps', $scope.app).then(function(){
+				$http.post(api +'apps', $scope.app).then(function(){
 //					$log.info("app saved!");
 				});
 			}
@@ -35,12 +36,12 @@
 		$scope.save = function(){
 			if ($scope.server.id != null){
 				// UPDATE
-				$http.put('api/servers', $scope.server).then(function(){
+				$http.put(api + 'servers', $scope.server).then(function(){
 //					$log.info("server updated!");
 				});
 			}else{
 				// SAVE
-				$http.post('api/servers', $scope.server).then(function(){
+				$http.post(api + 'servers', $scope.server).then(function(){
 //					$log.info("server saved!");
 				});
 			}
@@ -61,7 +62,7 @@
 		$scope.app = {};
 
 		$scope.list = function(){
-			$http.get('api/servers').then(function(serversList){
+			$http.get(api + 'servers').then(function(serversList){
 				$scope.servers = serversList.data;
 			});
 		};
@@ -69,7 +70,7 @@
 		$scope.remove = function(server){
 			var confirm = window.confirm('Are you sure to delete '+ server.dns+ '?');
 			if(confirm){
-				$http.delete('api/servers/'+server.id).then(function(){
+				$http.delete(api + 'servers/'+server.id).then(function(){
 					$scope.list();
 				});
 			}
@@ -129,7 +130,7 @@
 		$scope.removeApp = function(app){
 			var confirm = window.confirm('Are you sure to delete '+ app.context+ '?');
 			if(confirm){
-				$http.delete('api/apps/'+app.id).then(function(){
+				$http.delete(api + 'apps/'+app.id).then(function(){
 					$scope.list();
 				});
 			}

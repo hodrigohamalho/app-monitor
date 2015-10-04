@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>lab.hack</groupId>
-	<artifactId>app-monitor</artifactId>
+	<artifactId>app-monitor-api</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
-	<name>APP Monitor</name>
-	<description>APP Monitor</description>
+	<name>APP Monitor API</name>
+	<description>APP Monitor API</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
