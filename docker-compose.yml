@@ -1,0 +1,11 @@
+web:
+  build: web/.
+  ports:
+   - "8080:8080"
+  links:
+   - api
+api:
+  build: api/.
+  ports:
+   - "9000:8080"
+
