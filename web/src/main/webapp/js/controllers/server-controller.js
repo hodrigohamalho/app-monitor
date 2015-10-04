@@ -7,18 +7,6 @@
 		$scope.app = app;
 
 		$scope.save = function(){
-			if ($scope.app.id != null){
-				// UPDATE
-				$http.put(api +'apps', $scope.app).then(function(){
-//					$log.info("app updated!");
-				});
-			}else{
-				// SAVE
-				$http.post(api +'apps', $scope.app).then(function(){
-//					$log.info("app saved!");
-				});
-			}
-			
 			$modalInstance.close($scope.app);
 		};
 
@@ -34,18 +22,6 @@
 		$scope.server = server;
 
 		$scope.save = function(){
-			if ($scope.server.id != null){
-				// UPDATE
-				$http.put(api + 'servers', $scope.server).then(function(){
-//					$log.info("server updated!");
-				});
-			}else{
-				// SAVE
-				$http.post(api + 'servers', $scope.server).then(function(){
-//					$log.info("server saved!");
-				});
-			}
-			
 			$modalInstance.close($scope.server);
 		};
 
@@ -93,10 +69,24 @@
 		    });
 
 			modalInstance.result.then(function (data) {
-				$scope.server = {};
-				$scope.list();
-//				$log.info("Callback modal: "+data);
+				$log.info("Callback modal: "+data);
+				
+				if ($scope.server.id != null){
+					// UPDATE
+					$http.put(api + 'servers', $scope.server).then(function(){
+						$scope.server = {};
+						$scope.list();
+					});
+				}else{
+					// SAVE
+					$http.post(api + 'servers', $scope.server).then(function(){
+						$scope.server = {};
+						$scope.list();
+					});
+				}
 			}, function () {
+				// When modal is canceled
+				$log.info("Modal canceled: ");
 				$scope.server = {};
 			});
 		};
@@ -119,9 +109,19 @@
 		    });
 
 			modalInstance.result.then(function (data) {
-				$scope.app = {};
-				$scope.list();
-//				$log.info("Callback modal: "+data);
+				if ($scope.app.id != null){
+					// UPDATE
+					$http.put(api +'apps', $scope.app).then(function(){
+						$scope.app = {};
+						$scope.list();
+					});
+				}else{
+					// SAVE
+					$http.post(api +'apps', $scope.app).then(function(){
+						$scope.app = {};
+						$scope.list();
+					});
+				}
 			}, function () {
 				$scope.app = {};
 			});
