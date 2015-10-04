@@ -32,6 +32,7 @@ public class ServerREST {
 	
 	@GET
 	public List<Server> listAllMembers() {
+		log.info("Listing all members...");
 		return serverDAO.findAll();
 	}
 
