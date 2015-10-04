@@ -1,7 +1,10 @@
 (function(){
 	var app = angular.module('app-monitor');
-	var api = "http://localhost:8180/app-monitor-api/api/";
-	
+	var port = "9000";
+	var api = window.location.protocol + "//" +
+						window.location.hostname + ":" + port +
+						"/app-monitor-api/api/";
+
 	app.controller('AppModalCtrl', function ($scope, $http, $modalInstance, app, $log) {
 
 		$scope.app = app;
@@ -14,9 +17,9 @@
 //			$log.info("Cancel");
 			$modalInstance.dismiss('cancel');
 		};
-		  
+
 	});
-	
+
 	app.controller('ServerModalCtrl', function ($scope, $http, $modalInstance, server, $log) {
 
 		$scope.server = server;
@@ -29,7 +32,7 @@
 //			$log.info("Cancel");
 			$modalInstance.dismiss('cancel');
 		};
-		  
+
 	});
 
 	app.controller('ServerController', function($scope, $http, $modal, $log){
@@ -56,7 +59,7 @@
 			if (server != null){
 				$scope.server = server;
 			}
-				
+
 		    var modalInstance = $modal.open({
 		      animation: true,
 		      templateUrl: 'serverModalForm.html',
@@ -70,7 +73,7 @@
 
 			modalInstance.result.then(function (data) {
 				$log.info("Callback modal: "+data);
-				
+
 				if ($scope.server.id != null){
 					// UPDATE
 					$http.put(api + 'servers', $scope.server).then(function(){
@@ -90,13 +93,13 @@
 				$scope.server = {};
 			});
 		};
-		
+
 		$scope.appModal = function (app, serverId) {
 			if (app != null){
 				$scope.app = app;
 			}
 			$scope.app.server = { "id": serverId };
-				
+
 		    var modalInstance = $modal.open({
 		      animation: true,
 		      templateUrl: 'appModalForm.html',
@@ -126,7 +129,7 @@
 				$scope.app = {};
 			});
 		};
-		
+
 		$scope.removeApp = function(app){
 			var confirm = window.confirm('Are you sure to delete '+ app.context+ '?');
 			if(confirm){
