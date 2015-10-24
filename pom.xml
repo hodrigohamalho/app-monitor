@@ -1,11 +1,10 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>lab.hack</groupId>
 	<artifactId>app-monitor</artifactId>
-	<version>1.0</version>
+	<version>1.2-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>APP Monitor</name>
 	<description>APP Monitor</description>
@@ -24,6 +23,14 @@
 		<nexus.url>http://nexus-devops.cloud.devops.org</nexus.url>
 		<wildfly.maven.plugin.version>1.0.2.Final</wildfly.maven.plugin.version>
 	</properties>
+
+	<!-- Mandatory session to use release plugin -->
+	<scm>
+      <connection>scm:git:https://github.com/hodrigohamalho/app-monitor.git</connection>
+      <url>https://github.com/hodrigohamalho/app-monitor.git</url>
+      <developerConnection>scm:git:https://github.com/hodrigohamalho/app-monitor.git</developerConnection>
+      <tag>v1.1</tag>
+  </scm>
 
 	<distributionManagement>
 	    <repository>
@@ -168,6 +175,21 @@
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
 				<version>${wildfly.maven.plugin.version}</version>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.1</version>
+				<configuration>
+				    <show>private</show>
+				    <nohelp>true</nohelp>
+				</configuration>
+	  	</plugin>
+
+	  	<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.4</version>
 			</plugin>
 		</plugins>
 	</build>
