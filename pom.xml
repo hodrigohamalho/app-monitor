@@ -26,11 +26,11 @@
 
 	<!-- Mandatory session to use release plugin -->
 	<scm>
-      <connection>scm:git:https://github.com/hodrigohamalho/app-monitor.git</connection>
-      <url>https://github.com/hodrigohamalho/app-monitor.git</url>
-      <developerConnection>scm:git:https://github.com/hodrigohamalho/app-monitor.git</developerConnection>
-      <tag>v1.1</tag>
-  </scm>
+		<connection>scm:git:https://github.com/hodrigohamalho/app-monitor.git</connection>
+		<url>https://github.com/hodrigohamalho/app-monitor.git</url>
+		<developerConnection>scm:git:https://github.com/hodrigohamalho/app-monitor.git</developerConnection>
+		<tag>v1.1</tag>
+	</scm>
 
 	<distributionManagement>
 	    <repository>
@@ -171,22 +171,22 @@
 				</configuration>
 			</plugin>
 
-      <plugin>
+			<plugin>
 				<groupId>org.wildfly.plugins</groupId>
 				<artifactId>wildfly-maven-plugin</artifactId>
 				<version>${wildfly.maven.plugin.version}</version>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.10.1</version>
 				<configuration>
-				    <show>private</show>
-				    <nohelp>true</nohelp>
+					<show>private</show>
+					<nohelp>true</nohelp>
 				</configuration>
-	  	</plugin>
+			</plugin>
 
-	  	<plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.4</version>
