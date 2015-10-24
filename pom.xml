@@ -22,6 +22,7 @@
 		<version.htmlunit>2.4</version.htmlunit>
 		<version.gson>2.3.1</version.gson>
 		<nexus.url>http://nexus-devops.cloud.devops.org</nexus.url>
+		<wildfly.maven.plugin.version>1.0.2.Final</wildfly.maven.plugin.version>
 	</properties>
 
 	<distributionManagement>
@@ -162,6 +163,12 @@
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
+
+      <plugin>
+				<groupId>org.wildfly.plugins</groupId>
+				<artifactId>wildfly-maven-plugin</artifactId>
+				<version>${wildfly.maven.plugin.version}</version>
+			</plugin>
 		</plugins>
 	</build>
 
@@ -198,5 +205,4 @@
             </build>
         </profile>
     </profiles>
-		
 </project>
